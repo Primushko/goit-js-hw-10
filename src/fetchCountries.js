@@ -1,13 +1,15 @@
+const BASE_URL = `https://restcountries.com/v3.1`;
+const FIELDS = `?fields=name,capital,population,flags.svg,languages`;
+
+
 export default function fetchCountries(name) {
-    const baseUrl = 'https://restcountries.com/v3.1/all';
-    const url = `${baseUrl}?fields=name,capital,population,flags.svg,languages`;
+    const url = `${BASE_URL}/name/${name}${FIELDS}`;
 
     return fetch(url)
-    .then(response => {
-        if (response.ok) {
-        return response.json();
-        }
-        throw new Error('Error fetching countries.');
-    })
-    .catch(error => console.log(error));
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Error fetching countries.');
+        });    
 }
