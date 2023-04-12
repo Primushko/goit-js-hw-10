@@ -1,10 +1,20 @@
 import './css/styles.css';
-// import debounce from 'lodash.debounce';
-// import Notiflix from 'notiflix';
+import debounce from 'lodash.debounce';
+import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
-
+fetch(
+    `https://restcountries.com/v3.1/all?fields=name.official,capital,population,flags.svg,languages`
+).then(response => {
+    return response.json();
+})
+    .then(name => {
+        console.log(name);
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
 // const searchBox = document.querySelector('#search-box');
 // const countryList = document.querySelector('#country-list');
