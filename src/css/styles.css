@@ -19,8 +19,8 @@ body {
   margin-bottom: 16px;
 }
 
+/* Додав мінімальне оформлення елементів інтерфейсу. */
 
-/* List */
 .country-list {
   padding: 0;
 }
@@ -42,7 +42,7 @@ body {
   padding: 0;
 }
 
-/* Info */
+
 .country__flag {
   display: flex;
   gap: 10px;
@@ -50,7 +50,7 @@ body {
 }
 .country__img {
   display: block;
-  width: 100px;
+  width: 200px;
 }
 .country__name {
   display: flex;
@@ -58,7 +58,7 @@ body {
   margin: 0;
 
   font-weight: 900;
-  font-size: 30px;
+  font-size: 50px;
 }
 
 .country__info {
