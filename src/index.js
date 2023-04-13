@@ -5,11 +5,11 @@ import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 const searchBox = document.querySelector('#search-box');
-const countryList = document.querySelector('#country-list');
-const countryInfo = document.querySelector('#country-info');
+const countryList = document.querySelector('.country-list');
+const countryInfo = document.querySelector('.country-info');
 
 searchBox.addEventListener('input', debounce(onSearch, 300));
-//  `https://restcountries.com/v3.1/all?fields=name.official,capital,population,flags.svg,languages`
+
 function onSearch() {
     const name = searchBox.value.trim();
     if (name === '') {

@@ -1,10 +1,6 @@
-const BASE_URL = `https://restcountries.com/v3.1`;
-const FIELDS = `?fields=name,capital,population,flags.svg,languages`;
-
 
 export default function fetchCountries(name) {
-    const url = `${BASE_URL}/name/${name}${FIELDS}`;
-
+    const url = `https://restcountries.com/v3.1/all?fields=name.official,capital,population,flags,languages`;
     return fetch(url)
         .then(response => {
             if (response.ok) {
@@ -12,4 +8,4 @@ export default function fetchCountries(name) {
             }
             throw new Error('Error fetching countries.');
         });    
-}
+    }
