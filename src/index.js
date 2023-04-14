@@ -1,50 +1,59 @@
-import './css/styles.css';
+import './css/styles.css';       
 import { fetchCountries } from './fetchCountries';
 import debounce from 'lodash.debounce';
+// імпортує функцію debounce з пакету lodash.debounce. 
+// дозволяє затримати виконання функції onSearchCountry на 300 мілісекунд
 import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
+// константа, яка визначає затримку для функції debounce.
 const refs = {
     input: document.getElementById(`search-box`),
     countryList: document.querySelector(`.country-list`),
     countryInfo: document.querySelector(`.country-info`),
 };
+// посилання на елементи сторінки, що використовуються для відображення результатів пошуку.
 
 refs.input.addEventListener('input', debounce(onSearchCountry, DEBOUNCE_DELAY));
+// функція додає подію вводу на текстове поле з пошуковим запитом. 
+//onSearchCountry викликається зі затримкою 300 мілісекунд, використовуючи функцію debounce.
 
 function onSearchCountry(e) {
     e.preventDefault();
-
+  // функція викликається при введенні запиту в поле пошуку. Вона викликає функцію fetchCountries,
+  //  щоб отримати інформацію про країни та відображати їх на сторінці.
     const inputValue = e.target.value.trim();
     if (!inputValue) {
     resetMarkup(refs.countryList);
     resetMarkup(refs.countryInfo);
     return;
     }
-
-    fetchCountries(inputValue) 
-        .then(dataCountry => {
+    fetchCountries(inputValue)
+    .then(dataCountry => {
         if (dataCountry.length > 10) {
-            Notiflix.Notify.info(
+        Notiflix.Notify.info(
             'Too many matches found. Please enter a more specific name.'
-            );
+        );
         } else if (dataCountry.length >= 2 && dataCountry.length <= 10) {
-            resetMarkup(refs.countryList);
-            createMarkupCountryList(dataCountry);
-            resetMarkup(refs.countryInfo);
+        resetMarkup(refs.countryList);
+        createMarkupCountryList(dataCountry);
+        resetMarkup(refs.countryInfo);
         } else {
-            resetMarkup(refs.countryInfo);
-            createMarkupCountryInfo(dataCountry);
-            resetMarkup(refs.countryList);
+        resetMarkup(refs.countryInfo);
+        createMarkupCountryInfo(dataCountry);
+        resetMarkup(refs.countryList);
         }
-        })
-        .catch(() => {
+    })
+    .catch(() => {
         resetMarkup(refs.countryList);
         resetMarkup(refs.countryInfo);
         Notiflix.Notify.failure('Oops, there is no country with that name');
-        });
+    });
 }
 
+
+// createMarkupCountryList()-приймає масив країн та створює HTML-розмітку списку країн. 
+// Для кожної країни в списку створюється елемент списку (li) з прапором та назвою країни.
 function createMarkupCountryList(dataCountry) {
     const markup = dataCountry
     .map(({ name, flags }) => {
@@ -57,6 +66,9 @@ function createMarkupCountryList(dataCountry) {
     return refs.countryList.insertAdjacentHTML('beforeend', markup);
 }
 
+
+// createMarkupCountryInfo()-приймає масив країн та створює HTML-розмітку інформації про країну.
+// для кожної країни в масиві створюється новий елемент
 function createMarkupCountryInfo(dataCountry) {
     const markup = dataCountry
     .map(({ name, capital, population, flags, languages }) => {
@@ -85,7 +97,10 @@ function createMarkupCountryInfo(dataCountry) {
 function resetMarkup(el) {
     el.innerHTML = '';
 }
-
+// У функції resetMarkup() використовується властивість innerHTML,  
+// яка дозволяє отримати або змінити HTML-вміст елемента.
+// приймає елемент el і встановлює його HTML-вміст в порожній рядок, що очищає вміст. 
+// очищає список країн та блок
 
 
 
