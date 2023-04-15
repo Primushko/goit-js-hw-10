@@ -32,7 +32,7 @@ function onSearchCountry(e) {
     .then(dataCountry => {
         if (dataCountry.length > 10) {
         Notiflix.Notify.info(
-            'Too many matches found. Please enter a more specific name.'
+            'Знайдено занадто багато збігів. Будь ласка, введіть більш конкретну назву'
         );
         } else if (dataCountry.length >= 2) {
         resetMarkup(refs.countryList);
@@ -47,7 +47,7 @@ function onSearchCountry(e) {
     .catch(() => {
         resetMarkup(refs.countryList);
         resetMarkup(refs.countryInfo);
-        Notiflix.Notify.failure('Oops, there is no country with that name');
+        Notiflix.Notify.failure('На жаль, країни з такою назвою не існує');
     });
 }
 
